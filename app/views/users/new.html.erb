@@ -10,8 +10,7 @@
     <input type="submit" name ="submit" value="Submit">
 </form>
 =end
-<br>
-<br>
+
 =begin 
 <%= form_tag('/users') do -%>
   <div>
@@ -31,9 +30,21 @@
 <% end -%> 
 =end
 
+<div>
+	<% if @user.errors.any? %>
+		<h3>Edits were not saved due to the following errors:</h3>
+		<ul>
+			<% @user.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+		</ul>
+	<% end %>
+</div>
+<div>
 <%= form_for(@user) do |f| %>
   Username: <%= f.text_field :username %><br />
   Email : <%= f.email_field :email %><br />
   Password : <%= f.password_field :password %><br />
   <%= f.submit "Create New User" %>
 <% end %>
+</div>
